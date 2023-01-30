@@ -1,6 +1,6 @@
 export default function Welcome(props) {
     return (
-    <h1> Hello, {props.name} Avneez</h1>
+    <h1> Hello, {props.name}</h1>
     );
   }
 

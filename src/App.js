@@ -6,7 +6,8 @@ import './App.css';
 function App() {
   return (
     <div>
-      <Welcome />
+      <Welcome name="Avneez"/>
+      <Welcome name="Mohit"/>
       <Gallery />
     </div>
   );
