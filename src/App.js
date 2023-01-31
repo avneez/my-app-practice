@@ -1,15 +1,28 @@
-// import logo from './logo.svg';
-import Gallery from './Gallery.js';
-import Welcome from './Welcome.js';
+
+import Gallery from './components/Gallery.js';
+import Welcome from './components/Welcome.js';
+import TodoList from './components/ToDoList.js';
+
 import './App.css';
+import Parent from './components/PropDrilling';
+
+
 
 function App() {
+
   return (
-    <div>
-      <Welcome name="Avneez"/>
-      <Welcome name="Mohit"/>
+    <>
+      <Welcome name="Avneez" role="Solution Engineer"/>
+      <Welcome name="Mohit" />
+      <Welcome name="Britani"/>
+      <Welcome name="Jeet"/>
+      <Welcome name="Zibrain" role="Mentor"/>
       <Gallery />
-    </div>
+      <TodoList />
+
+      <Parent />
+
+    </>
   );
 }
 
