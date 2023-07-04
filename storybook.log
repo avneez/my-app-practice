@@ -1,0 +1,35 @@
+npm ERR! code ERESOLVE
+npm ERR! ERESOLVE could not resolve
+npm ERR!
+npm ERR! While resolving: react-sound@1.2.0
+npm ERR! Found: react@18.2.0
+npm ERR! node_modules/react
+npm ERR!   peer react@"^18.0.0" from @testing-library/react@13.4.0
+npm ERR!   node_modules/@testing-library/react
+npm ERR!     @testing-library/react@"^13.4.0" from the root project
+npm ERR!   peer react@">=16" from react-audio-player@0.17.0
+npm ERR!   node_modules/react-audio-player
+npm ERR!     react-audio-player@"^0.17.0" from the root project
+npm ERR!   33 more (react-dom, react-scripts, the root project, ...)
+npm ERR!
+npm ERR! Could not resolve dependency:
+npm ERR! peer react@"^15.3.0 || ^16.0.0-0" from react-sound@1.2.0
+npm ERR! node_modules/react-sound
+npm ERR!   react-sound@"^1.2.0" from the root project
+npm ERR!
+npm ERR! Conflicting peer dependency: react@16.14.0
+npm ERR! node_modules/react  peer react@"^15.3.0 || ^16.0.0-0" from react-sound@1.2.0
+npm ERR! 
+npm ERR!   node_modules/react-sound
+npm ERR!     react-sound@"^1.2.0" from the root project
+npm ERR!
+npm ERR! Fix the upstream dependency conflict, or retry
+npm ERR! this command with --force or --legacy-peer-deps
+npm ERR! to accept an incorrect (and potentially broken) dependency resolution.
+npm ERR!
+npm ERR!
+npm ERR! For a full report see:
+npm ERR! /home/deq/.npm/_logs/2023-06-09T06_00_00_215Z-eresolve-report.txt
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     /home/deq/.npm/_logs/2023-06-09T06_00_00_215Z-debug-0.log

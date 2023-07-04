@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 
 const Clock = () => {
 
-    const[clock,setClock] = useState()
+    const[clock,setClock] = useState(0)
 
     const tick = () => {
         setClock(new Date().toLocaleTimeString());
