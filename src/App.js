@@ -14,7 +14,7 @@ import Player from './components/Player'
 import Counter from './components/Counter.js';
 import Colorizer from './components/Hooks/Colorizer.js';
 import UseEffectt from './components/Hooks/useEffectt.js';
-import FilterSearch from './components/FilterSearch.jsx';
+import FilterSearch from './components/FilteredSearch/FilterSearch.jsx';
 
 
 function App() {
@@ -44,10 +44,10 @@ function App() {
 
     {/* <Player url='https://soundcloud.com/pixeladed-le/long-playlist-of-relaxing-soft?utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing'/> */}
 
-    <Colorizer/>
-    <CounterP/>
+    {/* <Colorizer/> */}
+    {/* <CounterP/> */}
     <br></br>
-    <UseEffectt/>
+    {/* <UseEffectt/> */}
     <FilterSearch/>
     </>
   );
