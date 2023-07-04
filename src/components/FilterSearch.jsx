@@ -19,19 +19,14 @@ const FilterSearch = () => {
     } else {
       setFilteredData(userData);
     }
-  }, [value]);
+  });
 
   return (
     <div>
       <input placeholder="Search" onChange={(e) => setValue(e.target.value)} />
       {console.log("fdd", filteredData)}
       {filteredData.map((item) => {
-        return (
-          <h3
-            key={item.id}
-            style={{ color: "red" }}
-          >{`${item.first_name} ${item.last_name}`}</h3>
-        );
+        return <h3 key={item.id}>{`${item.first_name} ${item.last_name}`}</h3>;
       })}
     </div>
   );
