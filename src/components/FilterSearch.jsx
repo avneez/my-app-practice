@@ -8,10 +8,9 @@ const FilterSearch = () => {
   useEffect(() => {
     if (value !== "") {
       const data = [];
-      const res = userData.filter((item) => {
+      userData.filter((item) => {
         if (item.first_name.toLowerCase().startsWith(value)) {
           data.push(item);
-          console.log(item.first_name.toLowerCase());
           return data;
         }
       });
