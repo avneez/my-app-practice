@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import FilteredData from "./FilteredData";
+import FilteredInput from "./_FilteredInput";
 import userData from "./mockData/userData.json";
 
 const FilterSearch = () => {
@@ -24,7 +25,7 @@ const FilterSearch = () => {
 
   return (
     <div>
-      <input placeholder="Search" onChange={onChange} value={value} />
+      <FilteredInput onChange={onChange} value={value} />
       <FilteredData filteredData={filteredData} />
     </div>
   );
