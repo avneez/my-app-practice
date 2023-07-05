@@ -48,7 +48,6 @@ function App() {
     {/* <CounterP/> */}
     <br></br>
     {/* <UseEffectt/> */}
-    <FilterSearch/>
     </>
   );
 }
