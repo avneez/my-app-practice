@@ -1,11 +1,11 @@
 import React from "react";
 
 const FilteredInput = (props) => {
-  const { onChange, value } = props;
+  const { onChange } = props;
 
   return (
     <>
-      <input placeholder="Search" onChange={onChange} value={value} />
+      <input placeholder="Search" onChange={onChange} />
     </>
   );
 };

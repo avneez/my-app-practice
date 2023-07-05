@@ -4,10 +4,10 @@ import FilteredInput from "./_FilteredInput";
 import userData from "./mockData/userData.json";
 
 const FilterSearch = () => {
-  const [value, setValue] = useState("");
   const [filteredData, setFilteredData] = useState(userData);
 
-  useEffect(() => {
+  const handleFilter = (event) => {
+    const value = event.target.value;
     if (value !== "") {
       const filtered = userData.filter((item) => {
         const fullName = `${item.first_name} ${item.last_name}`.toLowerCase();
@@ -17,15 +17,11 @@ const FilterSearch = () => {
     } else {
       setFilteredData(userData);
     }
-  }, [value]);
-
-  const onChange = (e) => {
-    setValue(e.target.value);
   };
 
   return (
     <div>
-      <FilteredInput onChange={onChange} value={value} />
+      <FilteredInput onChange={handleFilter} />
       <FilteredData filteredData={filteredData} />
     </div>
   );
