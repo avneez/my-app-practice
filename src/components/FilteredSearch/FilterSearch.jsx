@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import FilteredData from "./FilteredData";
+import FilteredData from "./_FilteredData";
 import FilteredInput from "./_FilteredInput";
 import userData from "./mockData/userData.json";
 
