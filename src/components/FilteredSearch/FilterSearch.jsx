@@ -6,16 +6,29 @@ import userData from "./mockData/userData.json";
 const FilterSearch = () => {
   const [filteredData, setFilteredData] = useState(userData);
 
+  const displaySortedData = userData.sort((a, b) =>
+    a.first_name.localeCompare(b.first_name)
+  );
+
   const handleFilter = (event) => {
     const value = event.target.value;
     if (value !== "") {
-      const filtered = userData.filter((item) => {
+      const filteredStartsWith = [];
+      const filteredContains = [];
+
+      userData.forEach((item) => {
         const fullName = `${item.first_name} ${item.last_name}`.toLowerCase();
-        return fullName.includes(value.toLowerCase());
+        if (fullName.startsWith(value.toLowerCase())) {
+          filteredStartsWith.push(item);
+        } else if (fullName.includes(value.toLowerCase())) {
+          filteredContains.push(item);
+        }
       });
-      setFilteredData(filtered);
+
+      const filteredSortedData = [...filteredStartsWith, ...filteredContains];
+      setFilteredData(filteredSortedData);
     } else {
-      setFilteredData(userData);
+      setFilteredData(displaySortedData);
     }
   };
 
