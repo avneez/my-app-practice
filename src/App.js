@@ -14,6 +14,7 @@ import Player from './components/Player'
 import Counter from './components/Counter.js';
 import Colorizer from './components/Hooks/Colorizer.js';
 import UseEffectt from './components/Hooks/useEffectt.js';
+import FilterSearch from './components/FilteredSearch/FilterSearch.jsx'
 
 function App() {
   const obj={age: '35', d:'se'}
