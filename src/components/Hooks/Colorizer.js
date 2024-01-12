@@ -18,7 +18,7 @@ export default function Colorizer() {
   return (
     <div className='colorizer'>
     <div className='box' style={{backgroundColor: color}}>{color}</div>
-    <button onClick={changeColor}>Change Color</button>
+    <button onClick={()=>changeColor()}>Change Color</button>
     </div>
   )
 }
