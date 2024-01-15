@@ -9,7 +9,6 @@ const PasswordGen = () => {
   const passwordRef = useRef(null);
 
   const passwordGenerator = () => {
-  console.log("inside pg");
     let genChar = ""
     let genPass = '';
     let str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
