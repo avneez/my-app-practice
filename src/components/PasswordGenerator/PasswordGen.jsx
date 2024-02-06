@@ -29,7 +29,6 @@ const PasswordGen = () => {
   },[password])
 
   useEffect(() => {
-    console.log("inside useEffect")
     passwordGenerator()
   }, [charAllowed, numberAllowed, length])
 
