@@ -16,6 +16,7 @@ import Colorizer from './components/Hooks/Colorizer.js';
 import UseEffectt from './components/Hooks/useEffectt.js';
 import FilterSearch from './components/FilteredSearch/FilterSearch.jsx'
 import PasswordGen from './components/PasswordGenerator/PasswordGen.jsx';
+import Playercard from './components/PlayerScoreCard/Playercard.jsx';
 
 function App() {
   const obj={age: '35', d:'se'}
@@ -25,7 +26,7 @@ function App() {
   }
 
   return (
-    <>
+    <div>
        <Welcome name="Avneez" role="Solution Engineer"/>
       {/*<Welcome name="Mohit" />
       <Welcome name="Britani"/>
@@ -49,8 +50,9 @@ function App() {
     {/* <br></br> */}
     {/* <UseEffectt/> */}
     {/* <FilterSearch/> */}
-    <PasswordGen/>
-    </>
+    {/* <PasswordGen/> */}
+    <Playercard/>
+    </div>
   );
 }
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Sound from 'react-sound'
+// import Sound from 'react-sound'
 import HansZimmerCornfieldChase from '../audios/HansZimmerCornfieldChase.mp3'
 
 // const url='https://soundcloud.com/bridgeyb14/high-level-paulistos-ft-mo-escape-my-mind-bridgey-b-remix?utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing';
