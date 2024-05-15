@@ -3,15 +3,17 @@ import React, { useState } from 'react';
 const players = ['Akshat', 'Avneez', 'Amritesh', 'Abhishek'];
 
 const Scorecard = (props) => {
-  const { pname, score, onScoreChange } = props
-  return (
-      <div>
-          <h3>{pname}</h3>
-          <button onClick={() => onScoreChange(pname, 1)}>+</button>
-          <p>Score: {score}</p>
-          <button onClick={() => onScoreChange(pname, -1)}>-</button>
-      </div>
-  );
+    const { pname, score, onScoreChange } = props
+    return (
+        <div>
+            <h3>{pname}</h3>
+            <div style={{ display: 'flex', width: "100%", padding: "5px" }}>
+                <button onClick={() => onScoreChange(pname, 1)}>+</button>
+                <span style={{ padding: "5px" }}>Score: {score}</span>
+                <button onClick={() => onScoreChange(pname, -1)}>-</button>
+            </div>
+        </div>
+    );
 };
 
 const Playercard = () => {
@@ -22,6 +24,13 @@ const Playercard = () => {
         setPlayerScores(prevScores => ({
             ...prevScores,
             [playerName]: (prevScores[playerName] || 0) + increment
+        }));
+    };
+
+    const handleResetPlayerScore = (playerName) => {
+        setPlayerScores(prevScores => ({
+            ...prevScores,
+            [playerName]: 0
         }));
     };
 
@@ -41,6 +50,12 @@ const Playercard = () => {
                 score={playerScores[selectedPlayer] || 0}
                 onScoreChange={handleScoreChange}
             />
+            <div>
+                <button onClick={() => handleResetPlayerScore(selectedPlayer)}>Reset Player Score</button>
+            </div>
+            <div>
+                <button onClick={() => setPlayerScores({})}>Reset All</button>
+            </div>
         </div>
     );
 };
