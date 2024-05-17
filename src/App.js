@@ -17,6 +17,7 @@ import UseEffectt from './components/Hooks/useEffectt.js';
 import FilterSearch from './components/FilteredSearch/FilterSearch.jsx'
 import PasswordGen from './components/PasswordGenerator/PasswordGen.jsx';
 import Playercard from './components/PlayerScoreCard/Playercard.jsx';
+import SoloLevelling from './components/SoloLevellingGame/SoloLevelling.jsx';
 
 function App() {
   const obj={age: '35', d:'se'}
@@ -49,9 +50,10 @@ function App() {
     {/* <CounterP/> */}
     {/* <br></br> */}
     {/* <UseEffectt/> */}
-    <FilterSearch/>
-    {/* <PasswordGen/> */}
-    {/* <Playercard/> */}
+    {/* <FilterSearch/>
+    <PasswordGen/>
+    <Playercard/> */}
+    <SoloLevelling/>
     </div>
   );
 }
