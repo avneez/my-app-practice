@@ -1,9 +1,0 @@
-import React from 'react'
-
-const Push = () => {
-  return (
-    <div>Push</div>
-  )
-}
-
-export default Push

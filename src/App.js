@@ -1,17 +1,17 @@
 
-import Gallery from './components/Gallery.js';
-import Welcome from './components/Welcome.js';
-import TodoList from './components/ToDoList.js';
+import Gallery from './components/smallJsComponents/Gallery.js';
+import Welcome from './components/smallJsComponents/Welcome.js';
+import TodoList from './components/smallJsComponents/ToDoList.js';
 
 import './App.css';
-import Parent from './components/PropDrilling';
-import Add, {CounterP} from './components/Add.js';
-import Clock from './components/Clock.js';
-import HandleEvent from './components/HandleEvent.js';
-import Button from './components/Button.js';
-import List from './components/List.js';
-import Player from './components/Player'
-import Counter from './components/Counter.js';
+import Parent from './components/smallJsComponents/PropDrilling.js';
+import Add, {CounterP} from './components/smallJsComponents/Add.js';
+import Clock from './components/smallJsComponents/Clock.js';
+import HandleEvent from './components/smallJsComponents/HandleEvent.js';
+import Button from './components/smallJsComponents/Button.js';
+import List from './components/smallJsComponents/List.js';
+import Player from './components/smallJsComponents/Player.js'
+import Counter from './components/smallJsComponents/Counter.js';
 import Colorizer from './components/Hooks/Colorizer.js';
 import UseEffectt from './components/Hooks/useEffectt.js';
 import FilterSearch from './components/FilteredSearch/FilterSearch.jsx'
