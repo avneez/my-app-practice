@@ -54,7 +54,8 @@ function App() {
     {/* <FilterSearch/>
     <PasswordGen/>
     <Playercard/> */}
-    <SoloLevelingV1/>
+    {/* <SoloLevelingV1/> */}
+    <SoloLevelingV2/>
     </div>
   );
 }
