@@ -17,7 +17,7 @@ import UseEffectt from './components/Hooks/useEffectt.js';
 import FilterSearch from './components/FilteredSearch/FilterSearch.jsx'
 import PasswordGen from './components/PasswordGenerator/PasswordGen.jsx';
 import Playercard from './components/PlayerScoreCard/Playercard.jsx';
-import SoloLevelling from './components/SoloLevellingGame/SoloLevelling.jsx';
+import SoloLevelingV2 from './components/SoloLevelingGame/SoloLevelingV2/SoloLevelingV2.jsx';
 
 function App() {
   const obj={age: '35', d:'se'}
@@ -53,7 +53,7 @@ function App() {
     {/* <FilterSearch/>
     <PasswordGen/>
     <Playercard/> */}
-    <SoloLevelling/>
+    <SoloLevelingV2/>
     </div>
   );
 }

@@ -1,0 +1,61 @@
+.App {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.stats {
+  background-color: #4e2fe7;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  display: inline-block;
+}
+
+.game-container {
+  flex-grow: 1;
+  position: relative;
+  width: 600px;
+  height: 400px;
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  overflow: hidden;
+}
+
+.player {
+  position: absolute;
+  width: 60px;
+  height: 80px;
+  background-image: url('https://w0.peakpx.com/wallpaper/961/507/HD-wallpaper-sung-jin-woo-solo-leveling-thumbnail.jpg');
+  background-size: cover;
+}
+
+.monster {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCTKit4xMV9I5PO9EnzE-LtvAJiRanqJtGu8yNbIR_jA&s');
+  background-size: cover;
+}
+
+.instructions {
+  flex-basis: 5%;
+  padding: 5px;  
+  background-color: #141523;
+  border-radius: 5px;
+}
+
+.instructions h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.instructions p {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
