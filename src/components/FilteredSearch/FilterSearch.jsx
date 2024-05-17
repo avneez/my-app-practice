@@ -10,26 +10,32 @@ const FilterSearch = () => {
     a.first_name.localeCompare(b.first_name)
   );
 
+  let debounceTimeout;
+
   const handleFilter = (event) => {
-    const value = event.target.value;
-    if (value !== "") {
-      const filteredStartsWith = [];
-      const filteredContains = [];
+    const value = event.target.value.toLowerCase().trim();
 
-      userData.forEach((item) => {
-        const fullName = `${item.first_name} ${item.last_name}`.toLowerCase();
-        if (fullName.startsWith(value.toLowerCase())) {
-          filteredStartsWith.push(item);
-        } else if (fullName.includes(value.toLowerCase())) {
-          filteredContains.push(item);
-        }
-      });
+    clearTimeout(debounceTimeout);
 
-      const filteredSortedData = [...filteredStartsWith, ...filteredContains];
-      setFilteredData(filteredSortedData);
-    } else {
-      setFilteredData(displaySortedData);
-    }
+    debounceTimeout = setTimeout(() => {
+      if (value !== "") {
+        const filteredStartsWith = [];
+
+        const searchWords = value.split(" ").filter(word => word !== "");
+        userData.forEach((item) => {
+          const fullName = `${item.first_name} ${item.last_name}`.toLowerCase();
+          
+          const matches = searchWords.every(word => fullName.includes(word));
+          if (matches) {
+            filteredStartsWith.push(item);
+          }
+        });
+
+        setFilteredData(filteredStartsWith);
+      } else {
+        setFilteredData(displaySortedData);
+      }
+    }, 500);
   };
 
   return (
