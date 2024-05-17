@@ -10,7 +10,6 @@ import Clock from './components/smallJsComponents/Clock.js';
 import HandleEvent from './components/smallJsComponents/HandleEvent.js';
 import Button from './components/smallJsComponents/Button.js';
 import List from './components/smallJsComponents/List.js';
-import Player from './components/smallJsComponents/Player.js'
 import Counter from './components/smallJsComponents/Counter.js';
 import Colorizer from './components/Hooks/Colorizer.js';
 import UseEffectt from './components/Hooks/useEffectt.js';
