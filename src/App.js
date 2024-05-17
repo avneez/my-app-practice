@@ -17,6 +17,7 @@ import UseEffectt from './components/Hooks/useEffectt.js';
 import FilterSearch from './components/FilteredSearch/FilterSearch.jsx'
 import PasswordGen from './components/PasswordGenerator/PasswordGen.jsx';
 import Playercard from './components/PlayerScoreCard/Playercard.jsx';
+import SoloLevelingV1 from './components/SoloLevelingGame/SoloLevelingV1/SoloLevelingV1.jsx';
 import SoloLevelingV2 from './components/SoloLevelingGame/SoloLevelingV2/SoloLevelingV2.jsx';
 
 function App() {
@@ -53,7 +54,7 @@ function App() {
     {/* <FilterSearch/>
     <PasswordGen/>
     <Playercard/> */}
-    <SoloLevelingV2/>
+    <SoloLevelingV1/>
     </div>
   );
 }

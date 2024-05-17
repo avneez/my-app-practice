@@ -17,7 +17,7 @@ const Player = {
   experienceToLevelUp: 10,
 };
 
-function SoloLevelling() {
+function SoloLeveling() {
   const [player, setPlayer] = useState(Player);
   const [message, setMessage] = useState('');
 
@@ -67,4 +67,4 @@ function SoloLevelling() {
   );
 }
 
-export default SoloLevelling;
+export default SoloLeveling;
