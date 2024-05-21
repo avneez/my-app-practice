@@ -1,8 +1,6 @@
 import React,{useState} from 'react'
 
 const Folder = ({ explorer }) => {
-    console.log(explorer)
-
     const [expand, setExpand] = useState(false)
 
     if(explorer.isFolder) {
