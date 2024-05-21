@@ -18,6 +18,7 @@ import PasswordGen from './components/PasswordGenerator/PasswordGen.jsx';
 import Playercard from './components/PlayerScoreCard/Playercard.jsx';
 import SoloLevelingV1 from './components/SoloLevelingGame/SoloLevelingV1/SoloLevelingV1.jsx';
 import SoloLevelingV2 from './components/SoloLevelingGame/SoloLevelingV2/SoloLevelingV2.jsx';
+import FolderStructureDesign from './components/FolderStructureDesign/FolderStructureDesign.jsx';
 
 function App() {
   const obj={age: '35', d:'se'}
@@ -54,7 +55,8 @@ function App() {
     <PasswordGen/>
     <Playercard/> */}
     {/* <SoloLevelingV1/> */}
-    <SoloLevelingV2/>
+    {/* <SoloLevelingV2/> */}
+    <FolderStructureDesign/>
     </div>
   );
 }
