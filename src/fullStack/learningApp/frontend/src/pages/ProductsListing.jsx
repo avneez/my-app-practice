@@ -28,7 +28,7 @@ const ProductsListing = () => {
 
   return (
       <>
-        Products
+      {state?.products[0].name} <img src={state?.products[0].image}/>
       </>
   )
 }

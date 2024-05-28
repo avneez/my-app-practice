@@ -6,6 +6,7 @@ const cors = require('cors');
 const app = express();
 app.use(cors());
 
+app.use('/public', express.static('public'));
 
 //Mock data for the api
 const products = [
@@ -13,25 +14,29 @@ const products = [
         product_id: 1,
         name: 'Nike Shoes',
         price: 125,
-        description: 'Nike Air Max Running Shoes'
+        description: 'Nike Air Max Running Shoes',
+        image: 'http://localhost:3000/public/nike-shoes.jpg'
     },
     {
         product_id: 2,
         name: 'LG Refrigerator',
         price: 55,
-        description: 'Refrigerator with ice maker and food storage compartment.'
+        description: 'Refrigerator with ice maker and food storage compartment.',
+        image: 'http://localhost:3000/public/lg-refrigerator.jpg'
     },
     {
         product_id: 3,
         name: 'Samsung TV',
         price: 100,
-        description: '4k TV'
+        description: '4k TV',
+        image: 'http://localhost:3000/public/samsung-tv.jpg'
     },
     {
         product_id: 4,
         name: 'LG Washing Machine',
         price: 120,
-        description: 'Washing Machine with Steam feature'
+        description: 'Washing Machine with Steam feature',
+        image: 'http://localhost:3000/public/lg-washing-machine.jpg'
     },
 ]
 
