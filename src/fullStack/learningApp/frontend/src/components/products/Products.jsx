@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React from 'react'
 import './products.css'
 
@@ -39,7 +38,7 @@ const Products = ({state, dispatch}) => {
             </div>
             {
               cart.some(prod => prod.id === product.product_id) ?
-                <button className='cartButton' style={{ backgroundColor: "red" }} onClick={() => handleRemoveFromCart(product)}>
+                <button className='cartButton' style={{ backgroundColor: "crimson" }} onClick={() => handleRemoveFromCart(product)}>
                   Remove from Cart
                 </button>
                 :
