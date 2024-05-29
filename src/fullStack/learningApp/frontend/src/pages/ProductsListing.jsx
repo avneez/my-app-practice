@@ -1,6 +1,8 @@
 import { useEffect, useReducer } from 'react'
 import axios from 'axios'
 import { cartReducer } from '../reducers/cartReducer'
+import Products from '../components/products/Products'
+import Cart from '../components/cart/Cart'
 
 const ProductsListing = () => {
   const [state, dispatch] = useReducer(cartReducer, {
@@ -19,17 +21,15 @@ const ProductsListing = () => {
       payload: data.data
     })
   }
-
-  console.log(state)
-
   useEffect(() => {
     fetchData();
   }, []);
 
   return (
-      <>
-      {state?.products[0].name} <img src={state?.products[0].image}/>
-      </>
+      <div style={{display: 'flex'}}>
+        <Products state={state} dispatch={dispatch}/>
+        <Cart state={state} dispatch={dispatch}/>
+      </div>
   )
 }
 

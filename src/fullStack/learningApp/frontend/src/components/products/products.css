@@ -1,0 +1,38 @@
+.productsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width: 80%;
+    height: 100%;
+}
+
+.product {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 10px;
+    margin-top: 10px;
+    border: 1px solid grey;
+    width: 30%;
+}
+
+.productImageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.productImage {
+    height: 200px; 
+    width: 200px; 
+    object-fit: cover;
+}
+
+.cartButton {
+    padding: 5px;
+    border: 0;
+    border-radius: 5px;
+    color: white;
+}
