@@ -38,6 +38,62 @@ const products = [
         description: 'Washing Machine with Steam feature',
         image: 'http://localhost:3000/public/lg-washing-machine.jpg'
     },
+    {
+        product_id: 5,
+        name: 'Nike Shoes',
+        price: 125,
+        description: 'Nike Air Max Running Shoes',
+        image: 'http://localhost:3000/public/nike-shoes.jpg'
+    },
+    {
+        product_id: 6,
+        name: 'LG Refrigerator',
+        price: 55,
+        description: 'Refrigerator with ice maker and food storage compartment.',
+        image: 'http://localhost:3000/public/lg-refrigerator.jpg'
+    },
+    {
+        product_id: 7,
+        name: 'Samsung TV',
+        price: 100,
+        description: '4k TV',
+        image: 'http://localhost:3000/public/samsung-tv.jpg'
+    },
+    {
+        product_id: 8,
+        name: 'LG Washing Machine',
+        price: 120,
+        description: 'Washing Machine with Steam feature',
+        image: 'http://localhost:3000/public/lg-washing-machine.jpg'
+    },
+    {
+        product_id: 9,
+        name: 'Nike Shoes',
+        price: 125,
+        description: 'Nike Air Max Running Shoes',
+        image: 'http://localhost:3000/public/nike-shoes.jpg'
+    },
+    {
+        product_id: 10,
+        name: 'LG Refrigerator',
+        price: 55,
+        description: 'Refrigerator with ice maker and food storage compartment.',
+        image: 'http://localhost:3000/public/lg-refrigerator.jpg'
+    },
+    {
+        product_id: 11,
+        name: 'Samsung TV',
+        price: 100,
+        description: '4k TV',
+        image: 'http://localhost:3000/public/samsung-tv.jpg'
+    },
+    {
+        product_id: 12,
+        name: 'LG Washing Machine',
+        price: 120,
+        description: 'Washing Machine with Steam feature',
+        image: 'http://localhost:3000/public/lg-washing-machine.jpg'
+    },
 ]
 
 app.get('/', (req, res) => {
