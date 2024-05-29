@@ -1,15 +1,22 @@
 .cartContainer { 
     display: flex;
     flex-direction: column;
-    margin: 0px 10px;
-    background-color: "#ececec";
-    padding: 0px 10px;
-    width: 20%
+    margin-top: 10px;
+    width: 20%;
+    border: 1px solid grey;
+    padding: 10px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .cartTitle {
     font-size: 30px;
     align-self: center;
+}
+
+.cartItems {
+    display: flex;
+    flex-direction: column; 
+    width: 100%;
 }
 
 .cartItem {
@@ -18,6 +25,7 @@
     border: 1px solid grey;
     margin: 5px;
     justify-content: space-between;
+    gap: 5px;
 }
 
 .cartImageContainer {
@@ -32,4 +40,10 @@
     height: 70px; 
     width: 70px; 
     object-fit: cover;
+}
+
+.quantityContainer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
