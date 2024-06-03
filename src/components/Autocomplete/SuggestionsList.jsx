@@ -3,6 +3,7 @@ const SuggestionsList = ({
         highlight,
         dataKey,
         onSuggestionClick,
+        suggestionSelected
     }) => {
     
     const getHighlightedText = (text, highlight) => {
@@ -18,7 +19,7 @@ const SuggestionsList = ({
 
     return (
         <>
-            {suggestions.map((suggestion, index) => {
+            {!suggestionSelected && suggestions.map((suggestion, index) => {
                 const currSuggestion = dataKey ? suggestion[dataKey] : suggestion;       
                 return (
                     <li

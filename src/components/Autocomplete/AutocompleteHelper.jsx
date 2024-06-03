@@ -19,8 +19,10 @@ const AutocompleteHelper = ({
   const [suggestions, setSuggestions] = useState([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
+  const [suggestionSelected, setSuggestionSelected] = useState(false)
 
   const handleInputChange = (event) => {
+    setSuggestionSelected(false)
     setInputValue(event.target.value)
     onChange(event.target.value)
   };
@@ -61,6 +63,7 @@ const AutocompleteHelper = ({
     setInputValue(dataKey ? suggestion[dataKey] : dataKey);
     onSelect(suggestion);
     setSuggestions([]);
+    setSuggestionSelected(true);
   }
 
   return (
@@ -83,6 +86,7 @@ const AutocompleteHelper = ({
             highlight={inputValue}
             suggestions={suggestions}
             onSuggestionClick={handleSuggestionClick}
+            suggestionSelected={suggestionSelected}
           />
         </ul>
       )}
