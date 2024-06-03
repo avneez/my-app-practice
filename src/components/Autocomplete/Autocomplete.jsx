@@ -33,7 +33,7 @@ const Autocomplete = () => {
                 // staticData={staticData}
                 fetchSuggestions={fetchSuggestions}
                 dataKey={"title"}
-                customLoading={<>Loading...</>}
+                customLoading={<span style={{color: "black"}}>Loading...</span>}
                 onSelect={(res) => console.log(res)}
                 onChange={(input) => {}}
                 onBlur={(e) => {}}

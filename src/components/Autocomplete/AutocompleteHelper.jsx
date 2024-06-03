@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import './styles.css'
 import SuggestionsList from './SuggestionsList'
+import debounce from "lodash/debounce"
 
 const AutocompleteHelper = ({
   placeholder,
@@ -46,9 +47,11 @@ const AutocompleteHelper = ({
     }
   };
 
+  const getSuggestionsDebounced = useCallback(debounce(getSuggestions, 300),[])
+
   useEffect(() => { 
     if(inputValue.length > 1){ 
-      getSuggestions(inputValue)
+      getSuggestionsDebounced(inputValue)
     } else {
       setSuggestions([])
     }
