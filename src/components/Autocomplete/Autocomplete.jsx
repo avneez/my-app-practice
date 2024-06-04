@@ -34,10 +34,10 @@ const Autocomplete = () => {
                 fetchSuggestions={fetchSuggestions}
                 dataKey={"title"}
                 customLoading={<span style={{color: "black"}}>Loading...</span>}
-                onSelect={(res) => console.log(res)}
-                onChange={(input) => {}}
-                onBlur={(e) => {}}
-                onFocus={(e) => {}}
+                onSelect={() => {}}
+                onChange={() => {}}
+                onBlur={() => {}}
+                onFocus={() => {}}
                 customStyles={{}}
             />
         </>

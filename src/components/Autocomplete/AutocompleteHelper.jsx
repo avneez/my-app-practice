@@ -39,7 +39,6 @@ const AutocompleteHelper = ({
       } else if (fetchSuggestions) {
         result = await fetchSuggestions(query)
       }
-      console.log(suggestions,'suggestions inside getSuggestions')
       setSuggestions(result)
     } catch (error) {
       setError("Failed to fetch suggestions")
