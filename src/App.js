@@ -21,6 +21,7 @@ import SoloLevelingV2 from './components/SoloLevelingGame/SoloLevelingV2/SoloLev
 import FolderStructureDesign from './components/FolderStructureDesign/FolderStructureDesign.jsx';
 import Pagination from './components/pagination/Pagination.jsx';
 import Autocomplete from './components/Autocomplete/Autocomplete';
+import Login from './components/LoginOTP/Login.jsx';
 
 function App() {
   const obj={age: '35', d:'se'}
@@ -60,7 +61,8 @@ function App() {
     {/* <SoloLevelingV2/> */}
     {/* <FolderStructureDesign/> */}
     {/* <Pagination/> */}
-    <Autocomplete/>
+    {/* <Autocomplete/> */}
+    <Login/>
     </div>
   );
 }
