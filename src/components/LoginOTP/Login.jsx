@@ -1,55 +1,53 @@
-import React,{useState} from 'react'
-import OTPsubmit from './OTPsubmit'
+import React, { useState } from 'react';
+import OTPsubmit from './OTPsubmit';
 
 const Login = () => {
-  const [username, setUsername] = useState("")
-  const [password, setPassword] = useState("")
-  const [mobileNumber, setMobileNumber] = useState("")
-  const [validationError, setValidationError] = useState("")
+  const [userData, setUserData] = useState({
+    username: "",
+    password: "",
+    mobileNumber: "",
+  });
+  const [validationError, setValidationError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  
-  const handleUsername = (event) => {
-    setUsername(event.target.value);
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setUserData({
+      ...userData,
+      [name]: value,
+    });
   };
 
-  const handlePassword = (event) => {
-    setPassword(event.target.value);
-  };
-
-  const handleMobileNumber = (event) => {
-    setMobileNumber(event.target.value);
-  };
-  
   const handleLogin = (event) => {
     event.preventDefault();
-    if(!validationCheck()){
+    if (!validationCheck()) {
       return;
-    };
-
-    const payload = {
-      username: username,
-      password: password,
-      mobileNumber: mobileNumber,
-    };
+    }
 
     fetch('/', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(payload)
+      body: JSON.stringify(userData),
     })
-    .then((response) => response.json())
-    .catch(error => {
-      console.log(error)
-    });
+      .then((response) => response.json())
+      .catch(error => {
+        console.log(error);
+      });
 
-    setUsername("")
-    setPassword("")
-    setMobileNumber("")
+    setUserData({
+      username: "",
+      password: "",
+      mobileNumber: "",
+    });
+    setTimeout(() => {
+      alert("Logged In Successfully");
+    }, 300);
   };
 
   const validationCheck = () => {
+    const { username, password, mobileNumber } = userData;
     if (!username) {
       setValidationError("Username is required");
       return false;
@@ -58,38 +56,40 @@ const Login = () => {
       setValidationError("Password is required");
       return false;
     }
+    if (!mobileNumber) {
+      setValidationError("Mobile Number is required");
+      return false;
+    }
     setValidationError("");
     return true;
   };
 
-  const onOTPsubmit = () =>{
-    console.log("submit")
-  }
+  const onOTPsubmit = () => {
+    console.log("submit");
+  };
 
   return (
     <div>
       <div><h1>Login</h1></div>
-      <div style={{display:"flex", width:"300px", flexDirection:"column", gap:"10px", padding:"10px"}}>
-        <div>Username: <input id="username" type="text" value={username} onChange={handleUsername}/></div>
-        <div>Password: <input id="password" type={showPassword ? "text" : "password"} value={password} onChange={handlePassword}/></div>
-        <div style={{display:"flex", alignItems: "center", gap: "5px"}}>
-          <label for="check">Show Password
+      <div style={{ display: "flex", width: "300px", flexDirection: "column", gap: "10px", padding: "10px" }}>
+        <div>Username: <input id="username" name="username" type="text" value={userData.username} onChange={handleChange} /></div>
+        <div>Password: <input id="password" name="password" type={showPassword ? "text" : "password"} value={userData.password} onChange={handleChange} /></div>
+        <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+          <label htmlFor="check">Show Password
             <input
               id="check"
               type="checkbox"
-              value={showPassword}
-              onChange={() =>
-                setShowPassword((prev) => !prev)
-              }
+              checked={showPassword}
+              onChange={() => setShowPassword((prev) => !prev)}
             />
           </label>
         </div>
-        <div>Mobile Number: <input id="mobile" type="tel" value={mobileNumber} onChange={handleMobileNumber}/></div>
+        <div>Mobile Number: <input id="mobile" name="mobileNumber" type="tel" value={userData.mobileNumber} onChange={handleChange} /></div>
         <OTPsubmit length={4} onOTPsubmit={onOTPsubmit} />
         <div style={{ display: "flex", justifyContent: "center" }}>
           <button onClick={handleLogin}>Login</button>
         </div>
-        {validationError && <div style={{ color: 'red', display:"flex", justifyContent:"center" }}>{validationError}</div>}
+        {validationError && <div style={{ color: 'red', display: "flex", justifyContent: "center" }}>{validationError}</div>}
       </div>
     </div>
   )
