@@ -4,6 +4,7 @@ const Login = () => {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [validationError, setValidationError] = useState("")
+  const [showPassword, setShowPassword] = useState(false);
   
   const handleUsername = (event) => {
     setUsername(event.target.value);
@@ -54,8 +55,20 @@ const Login = () => {
     <div>
       <div><h1>Login</h1></div>
       <div style={{display:"flex", width:"300px", flexDirection:"column", gap:"10px", padding:"10px"}}>
-        <div>Username: <input type="text" value={username} onChange={handleUsername}/></div>
-        <div>Password: <input type="password" value={password} onChange={handlePassword}/></div>
+        <div>Username: <input id="username" type="text" value={username} onChange={handleUsername}/></div>
+        <div>Password: <input id="password" type={showPassword ? "text" : "password"} value={password} onChange={handlePassword}/></div>
+        <div style={{display:"flex", alignItems: "center", gap: "5px"}}>
+          <label for="check">Show Password
+            <input
+              id="check"
+              type="checkbox"
+              value={showPassword}
+              onChange={() =>
+                setShowPassword((prev) => !prev)
+              }
+            />
+          </label>
+        </div>
         <div style={{ display: "flex", justifyContent: "center" }}>
           <button onClick={handleLogin}>Login</button>
         </div>
