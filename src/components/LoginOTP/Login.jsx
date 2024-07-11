@@ -1,8 +1,10 @@
 import React,{useState} from 'react'
+import OTPsubmit from './OTPsubmit'
 
 const Login = () => {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
+  const [mobileNumber, setMobileNumber] = useState("")
   const [validationError, setValidationError] = useState("")
   const [showPassword, setShowPassword] = useState(false);
   
@@ -12,6 +14,10 @@ const Login = () => {
 
   const handlePassword = (event) => {
     setPassword(event.target.value);
+  };
+
+  const handleMobileNumber = (event) => {
+    setMobileNumber(event.target.value);
   };
   
   const handleLogin = (event) => {
@@ -23,6 +29,7 @@ const Login = () => {
     const payload = {
       username: username,
       password: password,
+      mobileNumber: mobileNumber,
     };
 
     fetch('/', {
@@ -36,6 +43,10 @@ const Login = () => {
     .catch(error => {
       console.log(error)
     });
+
+    setUsername("")
+    setPassword("")
+    setMobileNumber("")
   };
 
   const validationCheck = () => {
@@ -50,6 +61,10 @@ const Login = () => {
     setValidationError("");
     return true;
   };
+
+  const onOTPsubmit = () =>{
+    console.log("submit")
+  }
 
   return (
     <div>
@@ -69,6 +84,8 @@ const Login = () => {
             />
           </label>
         </div>
+        <div>Mobile Number: <input id="mobile" type="tel" value={mobileNumber} onChange={handleMobileNumber}/></div>
+        <OTPsubmit length={4} onOTPsubmit={onOTPsubmit} />
         <div style={{ display: "flex", justifyContent: "center" }}>
           <button onClick={handleLogin}>Login</button>
         </div>
