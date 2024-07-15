@@ -9,6 +9,7 @@ const Login = () => {
   });
   const [validationError, setValidationError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [otpInputField, setOtpInputField] = useState(false)
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -27,23 +28,34 @@ const Login = () => {
     fetch('/', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify(userData),
+      body: JSON.stringify(userData)
     })
-      .then((response) => response.json())
-      .catch(error => {
-        console.log(error);
-      });
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok ' + response.statusText);
+      }
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+      // Handle success
+    })
+    .catch((error) => {
+      console.error('There has been a problem with your fetch operation:', error);
+    })
 
     setUserData({
       username: "",
       password: "",
       mobileNumber: "",
     });
-    setTimeout(() => {
-      alert("Logged In Successfully");
-    }, 300);
+
+    
+    // setTimeout(() => {
+    //   alert("Logged In Successfully");
+    // }, 300);
   };
 
   const validationCheck = () => {
@@ -64,18 +76,39 @@ const Login = () => {
     return true;
   };
 
+  const handleMobileSubmit = (event) => {
+    event.preventDefault();
+
+    const regex = /[^0-9]/g
+    if(userData.mobileNumber.length < 10 || regex.test(userData.mobileNumber)){
+      alert("Invalid Mobile Number")
+      return
+    } else {
+      //Call BE API
+      setOtpInputField(true)
+    }
+  }
+
   const onOTPsubmit = () => {
-    console.log("submit");
+    console.log("otp submitted");
   };
 
   return (
     <div>
       <div><h1>Login</h1></div>
-      <div style={{ display: "flex", width: "300px", flexDirection: "column", gap: "10px", padding: "10px" }}>
-        <div>Username: <input id="username" name="username" type="text" value={userData.username} onChange={handleChange} /></div>
-        <div>Password: <input id="password" name="password" type={showPassword ? "text" : "password"} value={userData.password} onChange={handleChange} /></div>
+      <div style={{ display: "flex", maxWidth: "310px", flexDirection: "column", gap: "10px", padding: "10px" }}>
+        <div style={{display: "flex", justifyContent: "space-between"}}>Username: <input id="username" name="username" type="text" value={userData.username} onChange={handleChange} /></div>
+        <div style={{display: "flex", justifyContent: "space-between"}}>Password: <input id="password" name="password" type={showPassword ? "text" : "password"} value={userData.password} onChange={handleChange} /></div>
         <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
-          <label htmlFor="check">Show Password
+          <label htmlFor="check"
+            style={{
+              display: "flex",
+              width: "46%",
+              justifyContent: "space-between",
+              alignItems: "center"
+            }} 
+          >
+              Show Password
             <input
               id="check"
               type="checkbox"
@@ -84,9 +117,17 @@ const Login = () => {
             />
           </label>
         </div>
-        <div>Mobile Number: <input id="mobile" name="mobileNumber" type="tel" value={userData.mobileNumber} onChange={handleChange} /></div>
-        <OTPsubmit length={4} onOTPsubmit={onOTPsubmit} />
-        <div style={{ display: "flex", justifyContent: "center" }}>
+        <div style={{display: "flex", justifyContent: "space-between"}}>Mobile Number: <input id="mobile" name="mobileNumber" type="tel" value={userData.mobileNumber} onChange={handleChange} /></div>
+        <span><button onClick={handleMobileSubmit}> Send OTP</button></span>
+        {otpInputField && 
+          (
+            <>
+              <div>Enter OTP send to {userData.mobileNumber}</div>
+              <OTPsubmit length={4} onOTPsubmit={onOTPsubmit} />
+            </>
+          )
+        }
+        <div style={{ display: "flex", justifyContent: "center", marginTop:"50px" }}>
           <button onClick={handleLogin}>Login</button>
         </div>
         {validationError && <div style={{ color: 'red', display: "flex", justifyContent: "center" }}>{validationError}</div>}
