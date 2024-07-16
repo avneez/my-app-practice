@@ -23,9 +23,11 @@ const OTPsubmit = ({length=4, onOTPsubmit}) => {
         setOtp(newOtp)
 
         const combinedOtp = newOtp.join("")
-        if(combinedOtp.length===4) {
-            onOTPsubmit(combinedOtp)
-        }
+
+        //check no any otp field is empty
+        if (newOtp.every(item => item !== "") && combinedOtp.length === 4) {
+            onOTPsubmit(newOtp);
+          }
 
         //move forward automatically in the input field
         if(value && index < length-1 && ref.current[index+1]){
