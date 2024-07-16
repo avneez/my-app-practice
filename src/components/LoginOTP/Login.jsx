@@ -53,9 +53,9 @@ const Login = () => {
     });
 
     
-    // setTimeout(() => {
-    //   alert("Logged In Successfully");
-    // }, 300);
+    setTimeout(() => {
+      alert("Logged In Successfully");
+    }, 300);
   };
 
   const validationCheck = () => {
@@ -89,27 +89,29 @@ const Login = () => {
     }
   }
 
-  const onOTPsubmit = () => {
-    console.log("otp submitted");
+  const onOTPsubmit = (otp) => {
+    const isInvalid = otp.some(item => item === '');
+    if (isInvalid) {
+      alert("Invalid OTP");
+      return;
+    }
+
+    setTimeout(() => {
+      alert("OTP Submitted successfully");
+    }, 300);
   };
 
   return (
     <div>
-      <div><h1>Login</h1></div>
-      <div style={{ display: "flex", maxWidth: "310px", flexDirection: "column", gap: "10px", padding: "10px" }}>
-        <div style={{display: "flex", justifyContent: "space-between"}}>Username: <input id="username" name="username" type="text" value={userData.username} onChange={handleChange} /></div>
-        <div style={{display: "flex", justifyContent: "space-between"}}>Password: <input id="password" name="password" type={showPassword ? "text" : "password"} value={userData.password} onChange={handleChange} /></div>
+      <div style={{marginLeft: "10px"}}><h1>Login</h1></div>
+      <div className='formContainer'>
+        <div className='inputItem'>Username: <input className='inputField' id="username" name="username" type="text" value={userData.username} onChange={handleChange} /></div>
+        <div className='inputItem'>Password: <input className='inputField' id="password" name="password" type={showPassword ? "text" : "password"} value={userData.password} onChange={handleChange} /></div>
         <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
-          <label htmlFor="check"
-            style={{
-              display: "flex",
-              width: "46%",
-              justifyContent: "space-between",
-              alignItems: "center"
-            }} 
-          >
+          <label htmlFor="check" className='checkBox'>
               Show Password
             <input
+              className='inputField'
               id="check"
               type="checkbox"
               checked={showPassword}
@@ -117,7 +119,7 @@ const Login = () => {
             />
           </label>
         </div>
-        <div style={{display: "flex", justifyContent: "space-between"}}>Mobile Number: <input id="mobile" name="mobileNumber" type="tel" value={userData.mobileNumber} onChange={handleChange} /></div>
+        <div className='inputItem'>Mobile Number: <input className='inputField' id="mobile" name="mobileNumber" type="tel" value={userData.mobileNumber} onChange={handleChange} /></div>
         <span><button onClick={handleMobileSubmit}> Send OTP</button></span>
         {otpInputField && 
           (
@@ -128,7 +130,7 @@ const Login = () => {
           )
         }
         <div style={{ display: "flex", justifyContent: "center", marginTop:"50px" }}>
-          <button onClick={handleLogin}>Login</button>
+          <button onClick={handleLogin} style={{width:"100%"}}>Login</button>
         </div>
         {validationError && <div style={{ color: 'red', display: "flex", justifyContent: "center" }}>{validationError}</div>}
       </div>

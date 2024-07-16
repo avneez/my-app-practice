@@ -4,4 +4,37 @@
    margin: 5px;
    text-align: center;
    font-size: 1.2em; 
+   border: 1px solid black;
+}
+
+.formContainer {
+    display: flex;
+    max-width: 310px; 
+    flex-direction: column; 
+    gap: 10px; 
+    padding: 10px;
+}
+
+.inputItem {
+    display: flex; 
+    justify-content: space-between;
+    align-items: center;
+}
+
+.checkBox {
+    display: flex;
+    width: 46%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.inputField {
+    display: flex;
+    padding: 4px;
+}
+
+.otpButtonsContainer{
+    display: flex; 
+    flex-direction: row;
+    gap: 4px;
 }
