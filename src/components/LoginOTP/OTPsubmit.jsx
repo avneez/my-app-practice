@@ -1,9 +1,8 @@
 import React,{useEffect, useRef, useState} from 'react'
 import './styles.css'
 
-const OTPsubmit = ({length=4, onOTPsubmit}) => {
-    const [otp, setOtp] = useState(new Array(length).fill(""))
-    console.log('otp',otp)
+const OTPsubmit = ({length=4, setOtp}) => {
+    const [otp, setLocalOtp] = useState(new Array(length).fill(""))
     const ref = useRef([])
 
     useEffect(()=>{
@@ -20,14 +19,8 @@ const OTPsubmit = ({length=4, onOTPsubmit}) => {
         const newOtp = [...otp]
         //allow only 1 input
         newOtp[index] = value.substring(value.length-1)
+        setLocalOtp(newOtp)
         setOtp(newOtp)
-
-        const combinedOtp = newOtp.join("")
-
-        //check no any otp field is empty
-        if (newOtp.every(item => item !== "") && combinedOtp.length === 4) {
-            onOTPsubmit(newOtp);
-          }
 
         //move forward automatically in the input field
         if(value && index < length-1 && ref.current[index+1]){
@@ -46,10 +39,6 @@ const OTPsubmit = ({length=4, onOTPsubmit}) => {
         } 
     }
 
-    const clearOTP = () => {
-        setOtp(new Array(length).fill(""))
-    }
-
     return (
         <div>
             <div>
@@ -65,10 +54,6 @@ const OTPsubmit = ({length=4, onOTPsubmit}) => {
                         ref={input => ref.current[index] = input}
                     />
                 })}
-            </div>
-            <div className='otpButtonsContainer'>
-                <button onClick={() => { onOTPsubmit(otp) }}>Submit OTP</button>
-                <button onClick={clearOTP}>Clear OTP</button>
             </div>
         </div>
     )

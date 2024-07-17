@@ -38,3 +38,13 @@
     flex-direction: row;
     gap: 4px;
 }
+
+.errorText{
+    color: red;
+    background-color: white;
+    font: 600;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    padding: 4px;
+}

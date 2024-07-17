@@ -10,6 +10,8 @@ const Login = () => {
   const [validationError, setValidationError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [otpInputField, setOtpInputField] = useState(false)
+  const [otp, setOtp] = useState(new Array(4).fill(""));
+
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -58,7 +60,7 @@ const Login = () => {
     }, 300);
   };
 
-  const validationCheck = () => {
+  const validationCheck = (otp) => {
     const { username, password, mobileNumber } = userData;
     if (!username) {
       setValidationError("Username is required");
@@ -68,11 +70,24 @@ const Login = () => {
       setValidationError("Password is required");
       return false;
     }
-    if (!mobileNumber) {
+    if (mobileNumber) {
+      const regex = /[^0-9]/g
+      if(mobileNumber.length < 10 || regex.test(mobileNumber)){
+        setValidationError("Invalid Mobile Number");
+        return false;
+      }
+    } else {
       setValidationError("Mobile Number is required");
       return false;
     }
+    
+    if(!onOTPsubmit(otp)){
+      setValidationError("Invalid OTP")
+      return false
+    }
+
     setValidationError("");
+    
     return true;
   };
 
@@ -89,16 +104,15 @@ const Login = () => {
     }
   }
 
-  const onOTPsubmit = (otp) => {
+  const onOTPsubmit = () => {
     const isInvalid = otp.some(item => item === '');
-    if (isInvalid) {
-      alert("Invalid OTP");
-      return;
+    if (isInvalid || otp.length !== 4) {
+      setValidationError("Invalid OTP");
+      return false;
     }
 
-    setTimeout(() => {
-      alert("OTP Submitted successfully");
-    }, 300);
+    setOtpInputField(false);
+    return true;
   };
 
   return (
@@ -120,19 +134,19 @@ const Login = () => {
           </label>
         </div>
         <div className='inputItem'>Mobile Number: <input className='inputField' id="mobile" name="mobileNumber" type="tel" value={userData.mobileNumber} onChange={handleChange} /></div>
-        <span><button onClick={handleMobileSubmit}> Send OTP</button></span>
+        <span><button onClick={handleMobileSubmit}>Send OTP</button></span>
         {otpInputField && 
           (
             <>
               <div>Enter OTP send to {userData.mobileNumber}</div>
-              <OTPsubmit length={4} onOTPsubmit={onOTPsubmit} />
+              <OTPsubmit length={4} setOtp={setOtp} />
             </>
           )
         }
-        <div style={{ display: "flex", justifyContent: "center", marginTop:"50px" }}>
+        <div style={{ display: "flex", justifyContent: "center" }}>
           <button onClick={handleLogin} style={{width:"100%"}}>Login</button>
         </div>
-        {validationError && <div style={{ color: 'red', display: "flex", justifyContent: "center" }}>{validationError}</div>}
+        {validationError && <div className='errorText'>{validationError}</div>}
       </div>
     </div>
   )
