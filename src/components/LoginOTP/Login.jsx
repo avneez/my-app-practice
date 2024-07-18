@@ -27,6 +27,11 @@ const Login = () => {
       return;
     }
 
+    if (!validateOtp()) {
+      setValidationErrorWithTimeout("Invalid OTP");
+      return;
+    }
+
     fetch('/', {
       method: 'POST',
       headers: {
@@ -53,41 +58,50 @@ const Login = () => {
       password: "",
       mobileNumber: "",
     });
+    setOtp([])
 
-    
     setTimeout(() => {
       alert("Logged In Successfully");
     }, 300);
   };
 
-  const validationCheck = (otp) => {
+  const setValidationErrorWithTimeout = (message) => {
+    setValidationError(message);
+    setTimeout(() => {
+      setValidationError("");
+    }, 3000);
+  };
+  
+  const validationCheck = () => {
     const { username, password, mobileNumber } = userData;
     if (!username) {
-      setValidationError("Username is required");
+      setValidationErrorWithTimeout("Username is required");
       return false;
     }
-    if (!password) {
-      setValidationError("Password is required");
-      return false;
+
+    if (password) {
+      if (password.length < 8) {
+        setValidationErrorWithTimeout("Password must be at least 8 characters long");
+        return false;
+      }
     }
+    else {
+      setValidationErrorWithTimeout("Password is required");
+      return false;
+    } 
+
     if (mobileNumber) {
       const regex = /[^0-9]/g
       if(mobileNumber.length < 10 || regex.test(mobileNumber)){
-        setValidationError("Invalid Mobile Number");
+        setValidationErrorWithTimeout("Invalid Mobile Number");
         return false;
       }
     } else {
-      setValidationError("Mobile Number is required");
+      setValidationErrorWithTimeout("Mobile Number is required");
       return false;
-    }
-    
-    if(!onOTPsubmit(otp)){
-      setValidationError("Invalid OTP")
-      return false
     }
 
     setValidationError("");
-    
     return true;
   };
 
@@ -96,7 +110,7 @@ const Login = () => {
 
     const regex = /[^0-9]/g
     if(userData.mobileNumber.length < 10 || regex.test(userData.mobileNumber)){
-      alert("Invalid Mobile Number")
+      setValidationErrorWithTimeout("Invalid Mobile Number")
       return
     } else {
       //Call BE API
@@ -104,16 +118,14 @@ const Login = () => {
     }
   }
 
-  const onOTPsubmit = () => {
-    const isInvalid = otp.some(item => item === '');
-    if (isInvalid || otp.length !== 4) {
-      setValidationError("Invalid OTP");
+  const validateOtp = () => {
+    const isInvalid = otp.some(item => item === '') || otp.length !== 4;
+    if (isInvalid) {
       return false;
     }
-
     setOtpInputField(false);
-    return true;
-  };
+    return true
+  }
 
   return (
     <div>
