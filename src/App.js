@@ -22,6 +22,7 @@ import FolderStructureDesign from './components/FolderStructureDesign/FolderStru
 import Pagination from './components/pagination/Pagination.jsx';
 import Autocomplete from './components/Autocomplete/Autocomplete';
 import Login from './components/LoginOTP/Login.jsx';
+import StarRating from './components/StarRating/StarRating.jsx';
 
 function App() {
   const obj={age: '35', d:'se'}
@@ -55,14 +56,15 @@ function App() {
     {/* <br></br> */}
     {/* <UseEffectt/> */}
     {/* <FilterSearch/>
-    <PasswordGen/>
-    <Playercard/> */}
+    <PasswordGen/> */ }
+    {/* <Playercard/>  */}
     {/* <SoloLevelingV1/> */}
     {/* <SoloLevelingV2/> */}
     {/* <FolderStructureDesign/> */}
     {/* <Pagination/> */}
     {/* <Autocomplete/> */}
-    <Login/>
+    {/* <Login/> */}
+    <StarRating />
     </div>
   );
 }
