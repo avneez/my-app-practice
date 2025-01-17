@@ -1,0 +1,102 @@
+.did-floating-label-content { 
+    position:relative; 
+    margin-bottom:20px; 
+  }
+  .did-floating-label {
+    color: var(--placeholder);
+    font-weight: 400;
+    font-size: 14px;
+    position:absolute;
+    pointer-events:none;
+    left:15px;
+    top:11px;
+    padding:0 5px;
+    background:#fff;
+    transition:0.2s ease all; 
+    -moz-transition:0.2s ease all; 
+    -webkit-transition:0.2s ease all;
+  }
+  .did-floating-input,.did-floating-select {
+    font-size:12px;
+    display:block;
+    width:100%;
+    height:36px;
+    padding: 0 20px;
+    /* background: #fff; */
+    color: #323840;
+    border: 1px solid #3D85D8;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  .did-floating-input:focus{
+    outline:none;
+  }
+
+  .did-floating-textarea:focus{
+    outline:none;
+  }
+  .did-floating-input:focus ~ .did-floating-label {
+    top:-8px;
+    font-size:13px;
+  }
+  .did-floating-textarea:focus ~ .did-floating-label{
+    top:-8px;
+    font-size:13px;
+  }
+  
+  .did-floating-input:not(:placeholder-shown) ~ .did-floating-label {
+    top:-8px;
+    font-size:13px;
+  }
+
+  .did-floating-textarea:not(:placeholder-shown) ~ .did-floating-label {
+    top:-10px;
+    font-size:13px;
+  }
+
+.accepted-file{
+  font-weight: bold;
+}
+  select.did-floating-select::-ms-expand {
+    display: none;
+  }
+  
+  .did-floating-input:not(:placeholder-shown) ~ .did-floating-label {
+    top:-8px;
+    font-size:13px;
+  }
+  .did-floating-select:not([value=""]):valid ~ .did-floating-label {
+    top:-8px;
+    font-size:13px;
+  }
+  .did-floating-select[value=""]:focus ~ .did-floating-label {
+    top:11px;
+    font-size:13px;
+  }
+
+  .did-floating-select-bg{
+    background-color: #fff;
+  }
+
+  .input-box-new{
+    position: relative;
+  }
+  .iconmail{
+    position: absolute;
+    left: 10px;
+    top: 5px;
+  }
+  .input-box-new .did-floating-input{
+    border: none;
+    /* background-color: #f8f8f8; */
+    padding-left: 34px;
+    border-radius: 0;
+    border: 1px solid #e2e8f0;
+  }
+  .input-box-new .did-floating-label{
+    background-color: #fff;
+    left: 26px;
+    top: 8px;
+    font-size: 13px;
+  }
+

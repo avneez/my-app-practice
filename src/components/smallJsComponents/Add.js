@@ -1,7 +1,12 @@
-import React from 'react';
+import React from 'react'
 
-const Add = (x,y) => {
-  return x + y;
+const Add = (a,b) => {
+  return a+b
 }
 
-export default Add;
+export const subtract = (a,b) => {
+    if(a>b) return  a-b
+    else return b-a
+}
+
+export default Add

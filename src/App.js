@@ -62,9 +62,9 @@ function App() {
     {/* <SoloLevelingV2/> */}
     {/* <FolderStructureDesign/> */}
     {/* <Pagination/> */}
-    {/* <Autocomplete/> */}
+    <Autocomplete/>
     {/* <Login/> */}
-    <StarRating />
+    {/* <StarRating /> */}
     </div>
   );
 }
