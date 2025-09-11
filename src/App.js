@@ -23,6 +23,7 @@ import Pagination from './components/pagination/Pagination.jsx';
 import Autocomplete from './components/Autocomplete/Autocomplete';
 import Login from './components/LoginOTP/Login.jsx';
 import StarRating from './components/StarRating/StarRating.jsx';
+import Carousel from './components/Caraousel/Carousel.jsx';
 
 function App() {
   const obj={age: '35', d:'se'}
@@ -31,9 +32,38 @@ function App() {
     alert('yo')
   }
 
+  const images = [
+    <img 
+      src="https://picsum.photos/800/400?random=11" 
+      alt="Image 1" 
+    />,
+    <img 
+      src="https://picsum.photos/800/400?random=21" 
+      alt="Image 2" 
+    />,
+    <img 
+      src="https://picsum.photos/800/400?random=31" 
+      alt="Image 3" 
+    />,
+    <img 
+      src="https://picsum.photos/800/400?random=41" 
+      alt="Image 4" 
+    />,
+    <img 
+      src="https://picsum.photos/800/400?random=51" 
+      alt="Image 5" 
+    />,
+  ];
+  
+
   return (
     <div>
        <Welcome name="Avneez" role="Solution Engineer"/>
+
+    <div>
+      <h1 style={{ textAlign: 'center' }}>React Carousel</h1>
+      <Carousel items={images} />
+    </div>
       {/*<Welcome name="Mohit" />
       <Welcome name="Britani"/>
       <Welcome name="Jeet"/>
@@ -62,7 +92,7 @@ function App() {
     {/* <SoloLevelingV2/> */}
     {/* <FolderStructureDesign/> */}
     {/* <Pagination/> */}
-    <Autocomplete/>
+    {/* <Autocomplete/> */}
     {/* <Login/> */}
     {/* <StarRating /> */}
     </div>

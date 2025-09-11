@@ -1,0 +1,99 @@
+/* Basic carousel styling */
+.carousel {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  position: relative;
+}
+
+.carousel-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+  overflow: hidden;
+  position: relative;
+}
+
+.carousel-slide {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fade 0.5s ease-in-out;
+}
+
+.carousel-slide img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+/* Arrows styling */
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 10;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.carousel-arrow.left {
+  left: 10px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.carousel-arrow.right {
+  right: 10px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.carousel-arrow:hover {
+  background: none;
+}
+
+/* Bottom buttons */
+.carousel-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.carousel-buttons button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #c3cfdd;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  color: black;
+}
+
+.carousel-buttons button:hover {
+  background-color: #a7b3c0;
+}
+
+/* Animation for sliding effect */
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
