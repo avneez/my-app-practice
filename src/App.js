@@ -24,6 +24,7 @@ import Autocomplete from './components/Autocomplete/Autocomplete';
 import Login from './components/LoginOTP/Login.jsx';
 import StarRating from './components/StarRating/StarRating.jsx';
 import Carousel from './components/Caraousel/Carousel.jsx';
+import PokemonApp from './PokemonApp/PokemonApp.jsx';
 
 function App() {
   const obj={age: '35', d:'se'}
@@ -33,37 +34,37 @@ function App() {
   }
 
   const images = [
-    <img 
-      src="https://picsum.photos/800/400?random=11" 
-      alt="Image 1" 
+    <img
+      src="https://picsum.photos/800/400?random=11"
+      alt="Image 1"
     />,
-    <img 
-      src="https://picsum.photos/800/400?random=21" 
-      alt="Image 2" 
+    <img
+      src="https://picsum.photos/800/400?random=21"
+      alt="Image 2"
     />,
-    <img 
-      src="https://picsum.photos/800/400?random=31" 
-      alt="Image 3" 
+    <img
+      src="https://picsum.photos/800/400?random=31"
+      alt="Image 3"
     />,
-    <img 
-      src="https://picsum.photos/800/400?random=41" 
-      alt="Image 4" 
+    <img
+      src="https://picsum.photos/800/400?random=41"
+      alt="Image 4"
     />,
-    <img 
-      src="https://picsum.photos/800/400?random=51" 
-      alt="Image 5" 
+    <img
+      src="https://picsum.photos/800/400?random=51"
+      alt="Image 5"
     />,
   ];
-  
+
 
   return (
     <div>
        <Welcome name="Avneez" role="Solution Engineer"/>
 
-    <div>
+    {/* <div>
       <h1 style={{ textAlign: 'center' }}>React Carousel</h1>
       <Carousel items={images} />
-    </div>
+    </div> */}
       {/*<Welcome name="Mohit" />
       <Welcome name="Britani"/>
       <Welcome name="Jeet"/>
@@ -95,6 +96,7 @@ function App() {
     {/* <Autocomplete/> */}
     {/* <Login/> */}
     {/* <StarRating /> */}
+    <PokemonApp/>
     </div>
   );
 }
