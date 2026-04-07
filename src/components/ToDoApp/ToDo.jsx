@@ -54,10 +54,11 @@ const ToDo = () => {
   };
 
   return (
-    <div className="app-container">
+    <div>
       <h1>ToDo List</h1>
       <form onSubmit={isEditing ? saveEdit : addTodo}>
         <input
+          id="task-input"
           type="text"
           value={task}
           onChange={(e) => setTask(e.target.value)}
@@ -69,10 +70,11 @@ const ToDo = () => {
       <ul>
         {todos.map(todo => (
           <li key={todo.id} className={todo.completed ? 'completed' : ''}>
-            <input type="checkbox" checked={todo.completed} onClick={() => toggleComplete(todo.id)}/> {todo.text}
+            <input id="task-checkbox" type="checkbox" checked={todo.completed} onClick={() => toggleComplete(todo.id)}/>
+            {todo.text}
             <div>
               <button onClick={() => startEdit(todo.id, todo.text)}>Edit</button>
-              <button className="delete-btn" onClick={() => deleteTodo(todo.id)}>Delete</button>
+              <button onClick={() => deleteTodo(todo.id)}>Delete</button>
             </div>
           </li>
         ))}
