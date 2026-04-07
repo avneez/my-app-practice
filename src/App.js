@@ -16,7 +16,7 @@ import UseEffectt from './components/Hooks/useEffectt.js';
 import FilterSearch from './components/FilteredSearch/FilterSearch.jsx'
 import PasswordGen from './components/PasswordGenerator/PasswordGen.jsx';
 import Playercard from './components/PlayerScoreCard/Playercard.jsx';
-import SoloLevelingV1 from './components/SoloLevelingGame/SoloLevelingV1/SoloLevelingV1.jsx';
+// import SoloLevelingV1 from './components/SoloLevelingGame/SoloLevelingV1/SoloLevelingV1.jsx';
 import SoloLevelingV2 from './components/SoloLevelingGame/SoloLevelingV2/SoloLevelingV2.jsx';
 import FolderStructureDesign from './components/FolderStructureDesign/FolderStructureDesign.jsx';
 import Pagination from './components/pagination/Pagination.jsx';
@@ -25,6 +25,7 @@ import Login from './components/LoginOTP/Login.jsx';
 import StarRating from './components/StarRating/StarRating.jsx';
 import Carousel from './components/Caraousel/Carousel.jsx';
 import PokemonApp from './PokemonApp/PokemonApp.jsx';
+import ToDo from './components/ToDoApp/ToDo.jsx';
 
 function App() {
   const obj={age: '35', d:'se'}
@@ -59,7 +60,7 @@ function App() {
 
   return (
     <div>
-       <Welcome name="Avneez" role="Solution Engineer"/>
+       {/* <Welcome name="Avneez" role="Solution Engineer"/> */}
 
     {/* <div>
       <h1 style={{ textAlign: 'center' }}>React Carousel</h1>
@@ -96,7 +97,8 @@ function App() {
     {/* <Autocomplete/> */}
     {/* <Login/> */}
     {/* <StarRating /> */}
-    <PokemonApp/>
+    {/* <PokemonApp/> */}
+    <ToDo/>
     </div>
   );
 }
