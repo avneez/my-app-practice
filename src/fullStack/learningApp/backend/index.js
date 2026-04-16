@@ -114,7 +114,7 @@ app.get('/api/products', (req, res) => {
 app.get('/product/:id', (req, res) => {
     const id = req.params.id;
     let product = products.find(p => p.product_id == id);
-    
+
     if (!product) {
         return res.status(404).send({
             statusCode: 404,
@@ -143,7 +143,7 @@ app.post('/product/create', (req, res) => {
         data: newProduct
     });
 });
-    
+
 // Delete an existing product
 app.delete('/product/delete/:id', (req, res) => {
     const id = req.params.id;
@@ -157,7 +157,7 @@ app.delete('/product/delete/:id', (req, res) => {
     } else {
         const deletedProduct = products[productIndex];
         products.splice(productIndex, 1);
-        
+
         res.json({
             statusCode: 200,
             message: "Product deleted successfully.",
