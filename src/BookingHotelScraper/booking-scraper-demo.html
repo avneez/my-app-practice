@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Booking Scraper API Demo</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: #0f0f13; color: #e2e2e8; min-height: 100vh; }
+
+  header { background: #003580; padding: 16px 24px; display: flex; align-items: center; gap: 12px; border-bottom: 2px solid #0057d9; }
+  header .logo { background: #fff; color: #003580; font-weight: 800; font-size: 13px; padding: 4px 10px; border-radius: 4px; letter-spacing: 0.5px; }
+  header h1 { font-size: 16px; font-weight: 600; color: #fff; }
+  header .badge { background: #00b67a; color: #fff; font-size: 11px; padding: 2px 8px; border-radius: 20px; margin-left: 8px; }
+
+  .layout { display: grid; grid-template-columns: 280px 1fr; height: calc(100vh - 54px); }
+
+  .sidebar { background: #16161e; border-right: 1px solid #2a2a36; padding: 20px; overflow-y: auto; }
+  .sidebar h3 { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: #666; margin-bottom: 12px; }
+
+  .endpoint-btn { width: 100%; text-align: left; background: #1e1e2a; border: 1px solid #2a2a3a; border-radius: 8px; padding: 10px 12px; margin-bottom: 8px; cursor: pointer; transition: all 0.15s; color: #e2e2e8; }
+  .endpoint-btn:hover { background: #252535; border-color: #0057d9; }
+  .endpoint-btn.active { background: #0a1f4e; border-color: #0057d9; }
+  .endpoint-btn .method { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px; margin-right: 8px; background: #00b67a; color: #fff; }
+  .endpoint-btn .path { font-size: 12px; font-family: 'Courier New', monospace; }
+  .endpoint-btn .desc { font-size: 11px; color: #888; margin-top: 4px; padding-left: 32px; }
+
+  .params-section { margin-top: 20px; }
+  .param-row { display: flex; flex-direction: column; margin-bottom: 10px; }
+  .param-row label { font-size: 11px; color: #888; margin-bottom: 4px; }
+  .param-row input, .param-row select { background: #1e1e2a; border: 1px solid #2a2a3a; border-radius: 6px; padding: 7px 10px; color: #e2e2e8; font-size: 13px; outline: none; }
+  .param-row input:focus, .param-row select:focus { border-color: #0057d9; }
+
+  .run-btn { width: 100%; background: #0057d9; color: #fff; border: none; border-radius: 8px; padding: 10px; font-size: 14px; font-weight: 600; cursor: pointer; margin-top: 8px; transition: background 0.15s; }
+  .run-btn:hover { background: #0046b0; }
+
+  .main { display: flex; flex-direction: column; overflow: hidden; }
+
+  .url-bar { background: #16161e; border-bottom: 1px solid #2a2a36; padding: 12px 20px; display: flex; align-items: center; gap: 8px; }
+  .url-display { background: #1e1e2a; border: 1px solid #2a2a3a; border-radius: 8px; padding: 8px 14px; flex: 1; font-family: 'Courier New', monospace; font-size: 13px; color: #a0c4ff; }
+
+  .content-area { flex: 1; display: grid; grid-template-rows: 1fr 1fr; overflow: hidden; }
+
+  .panel { display: flex; flex-direction: column; overflow: hidden; }
+  .panel-header { background: #16161e; border-bottom: 1px solid #2a2a36; padding: 8px 20px; display: flex; align-items: center; justify-content: space-between; }
+  .panel-title { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: #666; }
+  .status-badge { font-size: 12px; font-weight: 600; }
+  .status-badge.ok { color: #00b67a; }
+  .status-badge.err { color: #ff4d4f; }
+
+  .panel-body { flex: 1; overflow-y: auto; padding: 16px 20px; }
+
+  .hotel-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+  .hotel-card { background: #1e1e2a; border: 1px solid #2a2a3a; border-radius: 10px; padding: 14px; transition: border-color 0.15s; }
+  .hotel-card:hover { border-color: #0057d9; }
+  .hotel-card .hname { font-size: 13px; font-weight: 600; color: #e2e2e8; margin-bottom: 6px; line-height: 1.3; }
+  .hotel-card .hprice { font-size: 16px; font-weight: 700; color: #00b67a; }
+  .hotel-card .hprice span { font-size: 11px; color: #888; font-weight: 400; }
+  .hotel-card .hrating { display: inline-flex; align-items: center; gap: 4px; background: #003580; color: #fff; font-size: 12px; font-weight: 700; padding: 2px 8px; border-radius: 4px; margin-top: 6px; }
+  .hotel-card .hdist { font-size: 11px; color: #888; margin-top: 4px; }
+  .hotel-card .hcat { font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; color: #888; background: #252535; padding: 2px 6px; border-radius: 4px; display: inline-block; margin-top: 4px; }
+  .hotel-card.top3 { border-color: #f5a623; }
+  .hotel-card.top3 .rank { background: #f5a623; color: #000; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 6px; }
+
+  .json-view { background: #1a1a24; border-radius: 8px; padding: 16px; font-family: 'Courier New', monospace; font-size: 12px; line-height: 1.6; white-space: pre-wrap; word-break: break-all; }
+  .json-key { color: #7ec8e3; }
+  .json-str { color: #ce9178; }
+  .json-num { color: #b5cea8; }
+  .json-bool { color: #569cd6; }
+
+  .pagination-bar { display: flex; align-items: center; gap: 8px; padding: 12px 20px; border-top: 1px solid #2a2a36; background: #16161e; }
+  .page-btn { background: #1e1e2a; border: 1px solid #2a2a3a; color: #e2e2e8; border-radius: 6px; padding: 6px 12px; cursor: pointer; font-size: 13px; }
+  .page-btn:hover:not(:disabled) { background: #252535; border-color: #0057d9; }
+  .page-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+  .page-btn.active { background: #0057d9; border-color: #0057d9; }
+  .page-info { font-size: 13px; color: #888; flex: 1; }
+
+  .loading { display: flex; align-items: center; gap: 8px; color: #888; font-size: 14px; }
+  .spinner { width: 16px; height: 16px; border: 2px solid #2a2a3a; border-top-color: #0057d9; border-radius: 50%; animation: spin 0.8s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .empty { text-align: center; padding: 40px; color: #555; font-size: 14px; }
+
+  .divider { border: none; border-top: 1px solid #2a2a36; margin: 0; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">booking.com</div>
+  <h1>Scraper API — Live Demo</h1>
+</header>
+
+<div class="layout">
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h3>Endpoints</h3>
+    <button class="endpoint-btn active" onclick="selectEndpoint('hotels')" id="btn-hotels">
+      <span class="method">GET</span><span class="path">/hotels</span>
+      <div class="desc">All hotels, paginated</div>
+    </button>
+    <button class="endpoint-btn" onclick="selectEndpoint('top3')" id="btn-top3">
+      <span class="method">GET</span><span class="path">/hotels/top3</span>
+      <div class="desc">3 nearest to Indore centre</div>
+    </button>
+    <button class="endpoint-btn" onclick="selectEndpoint('health')" id="btn-health">
+      <span class="method">GET</span><span class="path">/health</span>
+      <div class="desc">Cache + server status</div>
+    </button>
+
+    <hr class="divider" style="margin: 16px 0;"/>
+
+    <div class="params-section" id="params-hotels">
+      <h3>Query Params</h3>
+      <div class="param-row"><label>page</label><input type="number" id="p-page" value="1" min="1"/></div>
+      <div class="param-row"><label>limit</label><input type="number" id="p-limit" value="6" min="1" max="50"/></div>
+      <div class="param-row"><label>sort</label>
+        <select id="p-sort">
+          <option value="rating_desc">rating (high → low)</option>
+          <option value="price_asc">price (low → high)</option>
+          <option value="price_desc">price (high → low)</option>
+        </select>
+      </div>
+      <div class="param-row"><label>minPrice (USD)</label><input type="number" id="p-min" placeholder="e.g. 20"/></div>
+      <div class="param-row"><label>maxPrice (USD)</label><input type="number" id="p-max" placeholder="e.g. 200"/></div>
+    </div>
+
+    <div class="params-section" id="params-top3" style="display:none">
+      <h3>No params</h3>
+      <p style="font-size:12px;color:#666;margin-top:6px;">Returns top 3 hotels sorted by Haversine distance from Indore city centre (22.7196°N, 75.8577°E).</p>
+    </div>
+    <div class="params-section" id="params-health" style="display:none">
+      <p style="font-size:12px;color:#666;">Returns server health, cache age, and total cached hotels.</p>
+    </div>
+
+    <button class="run-btn" onclick="runQuery()">▶ Run Request</button>
+  </div>
+
+  <!-- Main -->
+  <div class="main">
+    <div class="url-bar">
+      <span style="font-size:12px;color:#666;font-weight:600;">REQUEST</span>
+      <div class="url-display" id="url-display">http://localhost:3000/hotels?page=1&limit=6&sort=rating_desc</div>
+    </div>
+
+    <div class="content-area">
+      <!-- Visual cards panel -->
+      <div class="panel" style="border-bottom: 1px solid #2a2a36;">
+        <div class="panel-header">
+          <span class="panel-title">Results</span>
+          <span class="status-badge ok" id="status-text">● 200 OK — mock data</span>
+        </div>
+        <div class="panel-body" id="cards-panel">
+          <div class="empty">Press "Run Request" to fetch hotel data</div>
+        </div>
+        <div class="pagination-bar" id="pagination-bar" style="display:none"></div>
+      </div>
+
+      <!-- JSON panel -->
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-title">JSON Response</span>
+          <span id="json-meta" style="font-size:11px;color:#555"></span>
+        </div>
+        <div class="panel-body">
+          <div id="json-panel" class="json-view" style="color:#555">// response will appear here</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Mock data (mirrors what the scraper would return) ──────────────────────────
+const MOCK_HOTELS = [
+  { id:'hotel_1',  name:'WelcomHotel Sheraton Indore', address:'Vijay Nagar, Indore', priceRaw:'₹11,000', priceUSD:132, priceINR:11000, rating:9.0, reviewCount:1200, distanceFromCentreKm:4.2, category:'Luxury', lat:22.748, lng:75.901, checkin:'2026-04-17', checkout:'2026-04-19', nights:2 },
+  { id:'hotel_2',  name:'Radisson Blu Hotel Indore', address:'Bhawarkua Square, Indore', priceRaw:'₹8,500', priceUSD:102, priceINR:8500, rating:8.7, reviewCount:2341, distanceFromCentreKm:2.1, category:'Upscale', lat:22.7045, lng:75.8879, checkin:'2026-04-17', checkout:'2026-04-19', nights:2 },
+  { id:'hotel_3',  name:'Lemon Tree Premier Indore', address:'MG Road, Indore', priceRaw:'₹6,800', priceUSD:81.6, priceINR:6800, rating:8.4, reviewCount:3102, distanceFromCentreKm:0.8, category:'Mid-range', lat:22.7196, lng:75.8577, checkin:'2026-04-17', checkout:'2026-04-19', nights:2 },
+  { id:'hotel_4',  name:'Sayaji Hotel Indore', address:'H-1 Scheme 54, Indore', priceRaw:'₹7,200', priceUSD:86.4, priceINR:7200, rating:8.3, reviewCount:4500, distanceFromCentreKm:1.2, category:'Mid-range', lat:22.713, lng:75.86, checkin:'2026-04-17', checkout:'2026-04-19', nights:2 },
+  { id:'hotel_5',  name:'Fortune Landmark Hotel', address:'Scheme No. 54, Indore', priceRaw:'₹5,200', priceUSD:62.4, priceINR:5200, rating:8.1, reviewCount:1890, distanceFromCentreKm:1.5, category:'Mid-range', lat:22.7256, lng:75.8692, checkin:'2026-04-17', checkout:'2026-04-19', nights:2 },
+  { id:'hotel_6',  name:'Effotel Hotel Indore', address:'Bhawarkua, Indore', priceRaw:'₹4,500', priceUSD:54, priceINR:4500, rating:8.0, reviewCount:1050, distanceFromCentreKm:2.0, category:'Mid-range', lat:22.706, lng:75.885, checkin:'2026-04-17', checkout:'2026-04-19', nights:2 },
+  { id:'hotel_7',  name:'Hotel Shreemaya', address:'Race Course Road, Indore', priceRaw:'₹3,800', priceUSD:45.6, priceINR:3800, rating:7.8, reviewCount:980, distanceFromCentreKm:3.5, category:'Economy', lat:22.731, lng:75.875, checkin:'2026-04-17', checkout:'2026-04-19', nights:2 },
+  { id:'hotel_8',  name:'Grand Bhagwati Hotel', address:'Palasia, Indore', priceRaw:'₹2,900', priceUSD:34.8, priceINR:2900, rating:7.5, reviewCount:740, distanceFromCentreKm:2.8, category:'Economy', lat:22.728, lng:75.865, checkin:'2026-04-17', checkout:'2026-04-19', nights:2 },
+  { id:'hotel_9',  name:'Indore Residency', address:'Old Palasia, Indore', priceRaw:'₹2,100', priceUSD:25.2, priceINR:2100, rating:7.0, reviewCount:420, distanceFromCentreKm:3.0, category:'Budget', lat:22.723, lng:75.87, checkin:'2026-04-17', checkout:'2026-04-19', nights:2 },
+  { id:'hotel_10', name:'Hotel President', address:'RNT Marg, Indore', priceRaw:'₹2,400', priceUSD:28.8, priceINR:2400, rating:7.2, reviewCount:560, distanceFromCentreKm:0.5, category:'Budget', lat:22.72, lng:75.857, checkin:'2026-04-17', checkout:'2026-04-19', nights:2 },
+  { id:'hotel_11', name:'Hotel Balwas', address:'Siyaganj, Indore', priceRaw:'₹1,600', priceUSD:19.2, priceINR:1600, rating:6.5, reviewCount:190, distanceFromCentreKm:1.0, category:'Budget', lat:22.715, lng:75.856, checkin:'2026-04-17', checkout:'2026-04-19', nights:2 },
+  { id:'hotel_12', name:'Hotel Noorjahan', address:'Navlakha, Indore', priceRaw:'₹1,900', priceUSD:22.8, priceINR:1900, rating:6.8, reviewCount:310, distanceFromCentreKm:5.1, category:'Budget', lat:null, lng:null, checkin:'2026-04-17', checkout:'2026-04-19', nights:2 },
+];
+
+// ── Haversine ─────────────────────────────────────────────────────────────────
+function haversine(lat1, lng1, lat2, lng2) {
+  const R = 6371, toR = d => d * Math.PI / 180;
+  const dLat = toR(lat2 - lat1), dLng = toR(lng2 - lng1);
+  const a = Math.sin(dLat/2)**2 + Math.cos(toR(lat1))*Math.cos(toR(lat2))*Math.sin(dLng/2)**2;
+  return parseFloat((R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))).toFixed(2));
+}
+
+const DEST = { lat: 22.7196, lng: 75.8577 };
+
+// ── Mock API ──────────────────────────────────────────────────────────────────
+function mockAPI(endpoint, params) {
+  if (endpoint === 'health') {
+    return { status: 'ok', cached: true, cacheAge: '42s', totalCached: MOCK_HOTELS.length };
+  }
+  if (endpoint === 'top3') {
+    const withDist = MOCK_HOTELS.map(h => ({
+      ...h,
+      distanceKm: h.lat ? haversine(DEST.lat, DEST.lng, h.lat, h.lng) : null
+    })).sort((a,b) => {
+      if (a.distanceKm !== null && b.distanceKm !== null) return a.distanceKm - b.distanceKm;
+      if (a.distanceKm !== null) return -1; return 1;
+    });
+    return { success: true, destination: 'Indore, Madhya Pradesh', destinationCoords: DEST, top3: withDist.slice(0,3) };
+  }
+  // /hotels
+  let hotels = [...MOCK_HOTELS];
+  if (params.minPrice) hotels = hotels.filter(h => h.priceUSD >= +params.minPrice);
+  if (params.maxPrice) hotels = hotels.filter(h => h.priceUSD <= +params.maxPrice);
+  const sortFns = { price_asc: (a,b) => a.priceUSD-b.priceUSD, price_desc: (a,b) => b.priceUSD-a.priceUSD, rating_desc: (a,b) => b.rating-a.rating };
+  if (sortFns[params.sort]) hotels.sort(sortFns[params.sort]);
+  const page = +params.page||1, limit = Math.min(50, +params.limit||6);
+  const total = hotels.length, totalPages = Math.ceil(total/limit);
+  return { success: true, pagination: { page, limit, total, totalPages, hasNext: page<totalPages, hasPrev: page>1 }, data: hotels.slice((page-1)*limit, page*limit) };
+}
+
+// ── State ─────────────────────────────────────────────────────────────────────
+let currentEndpoint = 'hotels';
+let currentPage = 1;
+
+function selectEndpoint(ep) {
+  currentEndpoint = ep;
+  currentPage = 1;
+  ['hotels','top3','health'].forEach(e => {
+    document.getElementById(`btn-${e}`).classList.toggle('active', e===ep);
+    document.getElementById(`params-${e}`).style.display = e===ep ? '' : 'none';
+  });
+  updateURLBar();
+}
+
+function updateURLBar() {
+  let url = 'http://localhost:3000';
+  if (currentEndpoint === 'hotels') {
+    const p = document.getElementById('p-page').value || 1;
+    const l = document.getElementById('p-limit').value || 5;
+    const s = document.getElementById('p-sort').value;
+    const min = document.getElementById('p-min').value;
+    const max = document.getElementById('p-max').value;
+    url += `/hotels?page=${p}&limit=${l}&sort=${s}`;
+    if (min) url += `&minPrice=${min}`;
+    if (max) url += `&maxPrice=${max}`;
+  } else if (currentEndpoint === 'top3') url += '/hotels/top3';
+  else url += '/health';
+  document.getElementById('url-display').textContent = url;
+}
+
+['p-page','p-limit','p-sort','p-min','p-max'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener('input', updateURLBar);
+});
+
+// ── JSON syntax highlight ─────────────────────────────────────────────────────
+function highlight(obj) {
+  const json = JSON.stringify(obj, null, 2);
+  return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(\.\d+)?([eE][+-]?\d+)?)/g, (match) => {
+    let cls = 'json-num';
+    if (/^"/.test(match)) cls = /:$/.test(match) ? 'json-key' : 'json-str';
+    else if (/true|false/.test(match)) cls = 'json-bool';
+    return `<span class="${cls}">${match}</span>`;
+  });
+}
+
+// ── Render ────────────────────────────────────────────────────────────────────
+function runQuery() {
+  const params = {
+    page: document.getElementById('p-page')?.value || 1,
+    limit: document.getElementById('p-limit')?.value || 6,
+    sort: document.getElementById('p-sort')?.value || 'rating_desc',
+    minPrice: document.getElementById('p-min')?.value,
+    maxPrice: document.getElementById('p-max')?.value,
+  };
+
+  const cardsPanel = document.getElementById('cards-panel');
+  const jsonPanel = document.getElementById('json-panel');
+  const paginationBar = document.getElementById('pagination-bar');
+
+  cardsPanel.innerHTML = '<div class="loading"><div class="spinner"></div> Fetching...</div>';
+  jsonPanel.innerHTML = '// fetching...';
+
+  setTimeout(() => {
+    const data = mockAPI(currentEndpoint, params);
+
+    document.getElementById('status-text').textContent = '● 200 OK — mock data';
+    document.getElementById('status-text').className = 'status-badge ok';
+    document.getElementById('json-meta').textContent = `${JSON.stringify(data).length} bytes`;
+    jsonPanel.innerHTML = highlight(data);
+
+    if (currentEndpoint === 'health') {
+      cardsPanel.innerHTML = `
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:400px">
+          <div style="background:#1e1e2a;border:1px solid #2a2a3a;border-radius:8px;padding:14px;text-align:center">
+            <div style="font-size:11px;color:#888;margin-bottom:4px">STATUS</div>
+            <div style="font-size:18px;color:#00b67a;font-weight:700">OK</div>
+          </div>
+          <div style="background:#1e1e2a;border:1px solid #2a2a3a;border-radius:8px;padding:14px;text-align:center">
+            <div style="font-size:11px;color:#888;margin-bottom:4px">CACHE AGE</div>
+            <div style="font-size:18px;font-weight:700">42s</div>
+          </div>
+          <div style="background:#1e1e2a;border:1px solid #2a2a3a;border-radius:8px;padding:14px;text-align:center">
+            <div style="font-size:11px;color:#888;margin-bottom:4px">HOTELS</div>
+            <div style="font-size:18px;font-weight:700">${MOCK_HOTELS.length}</div>
+          </div>
+        </div>`;
+      paginationBar.style.display = 'none';
+      return;
+    }
+
+    if (currentEndpoint === 'top3') {
+      const { top3 } = data;
+      const labels = ['Nearest','2nd Closest','3rd Closest'];
+      cardsPanel.innerHTML = `<div class="hotel-cards">` + top3.map((h,i) => `
+        <div class="hotel-card top3">
+          <div class="rank">#${i+1} ${labels[i]}</div>
+          <div class="hname">${h.name}</div>
+          <div class="hprice">$${h.priceUSD} <span>/night</span></div>
+          <div class="hrating">★ ${h.rating}</div>
+          <div class="hdist">📍 ${h.distanceKm ?? h.distanceFromCentreKm} km from centre</div>
+          <div class="hcat">${h.category}</div>
+        </div>`).join('') + `</div>`;
+      paginationBar.style.display = 'none';
+      return;
+    }
+
+    // /hotels with pagination
+    const { pagination, data: hotels } = data;
+    cardsPanel.innerHTML = `<div class="hotel-cards">` + hotels.map(h => `
+      <div class="hotel-card">
+        <div class="hname">${h.name}</div>
+        <div style="font-size:11px;color:#666;margin-bottom:6px">${h.address}</div>
+        <div class="hprice">$${h.priceUSD} <span>/night</span></div>
+        <div class="hrating">★ ${h.rating} <span style="font-size:10px;font-weight:400;color:#aaa">(${h.reviewCount?.toLocaleString()})</span></div>
+        <div class="hdist">📍 ${h.distanceFromCentreKm} km</div>
+        <div class="hcat">${h.category}</div>
+      </div>`).join('') + `</div>`;
+
+    // Pagination
+    const { page, totalPages, total, limit: lim } = pagination;
+    let pagBtns = `<span class="page-info">Page ${page} of ${totalPages} · ${total} hotels total</span>`;
+    pagBtns += `<button class="page-btn" onclick="goPage(${page-1})" ${page<=1?'disabled':''}>← Prev</button>`;
+    for (let p = Math.max(1,page-1); p <= Math.min(totalPages, page+2); p++) {
+      pagBtns += `<button class="page-btn ${p===page?'active':''}" onclick="goPage(${p})">${p}</button>`;
+    }
+    pagBtns += `<button class="page-btn" onclick="goPage(${page+1})" ${page>=totalPages?'disabled':''}>Next →</button>`;
+    paginationBar.innerHTML = pagBtns;
+    paginationBar.style.display = 'flex';
+
+  }, 400);
+}
+
+function goPage(p) {
+  document.getElementById('p-page').value = p;
+  updateURLBar();
+  runQuery();
+}
+
+updateURLBar();
+</script>
+</body>
+</html>
