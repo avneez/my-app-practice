@@ -27,6 +27,7 @@ import Carousel from './components/Caraousel/Carousel.jsx';
 import PokemonApp from './PokemonApp/PokemonApp.jsx';
 import ToDo from './components/ToDoApp/ToDo.jsx';
 import DynamicSearch from './components/FilteredSearch/DynamicSearch.jsx';
+import ItemManager from './components/FilteredSearch/ItemManager.jsx';
 
 function App() {
   const obj={age: '35', d:'se'}
@@ -100,7 +101,8 @@ function App() {
     {/* <StarRating /> */}
     {/* <PokemonApp/> */}
     {/* <ToDo/> */}
-    <DynamicSearch/>
+    {/* <DynamicSearch/> */}
+    <ItemManager />
     </div>
   );
 }
