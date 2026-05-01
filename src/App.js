@@ -28,6 +28,7 @@ import PokemonApp from './PokemonApp/PokemonApp.jsx';
 import ToDo from './components/ToDoApp/ToDo.jsx';
 import DynamicSearch from './components/FilteredSearch/DynamicSearch.jsx';
 import ItemManager from './components/FilteredSearch/ItemManager.jsx';
+import FlippingCard from './components/FlippingCard/FlippingCard.jsx';
 
 function App() {
   const obj={age: '35', d:'se'}
@@ -89,8 +90,8 @@ function App() {
     {/* <CounterP/> */}
     {/* <br></br> */}
     {/* <UseEffectt/> */}
-    {/* <FilterSearch/>
-    <PasswordGen/> */ }
+    {/* <FilterSearch/> */}
+    {/* <PasswordGen/> */ }
     {/* <Playercard/>  */}
     {/* <SoloLevelingV1/> */}
     {/* <SoloLevelingV2/> */}
@@ -103,6 +104,7 @@ function App() {
     {/* <ToDo/> */}
     {/* <DynamicSearch/> */}
     <ItemManager />
+    <FlippingCard />
     </div>
   );
 }
